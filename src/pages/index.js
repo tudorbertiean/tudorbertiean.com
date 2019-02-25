@@ -7,7 +7,6 @@ import Footer from '../components/Footer'
 import Contact from '../components/Contact'
 import Img from "gatsby-image"
 import PropTypes from 'prop-types'
-require("prismjs/themes/prism-okaidia.css")
 
 
 export default class IndexPage extends React.Component {
