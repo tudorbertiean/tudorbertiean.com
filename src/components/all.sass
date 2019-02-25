@@ -1,0 +1,110 @@
+@charset "utf-8"
+@import "bulma"
+
+// Import a Google Font
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700')
+
+
+// Config vars
+$dark: #0E0F1E
+$dark-secondary: #1d1e21
+$body-color: #fff
+$light: #e0d7ce
+
+// Set your brand colors
+
+// Update Bulma's global variables
+$family-sans-serif: "Nunito", sans-serif
+
+// Update some of Bulma's component variables
+$control-border-width: 2px
+$input-border-color: transparent
+$input-shadow: none
+
+html 
+  scroll-behavior: smooth
+
+.navbar
+  background-color: $dark
+  .navbar-menu
+    background-color: $dark
+    box-shadow:none !important
+  .navbar-brand
+    background-color: $dark
+  .navbar-item
+    color: white
+  .navbar-item:hover
+    background-color: inherit
+    color: primary
+
+.navbar-item:hover
+  color: red
+
+
+// Helper Classes
+.full-width-image-container
+  width: 100vw
+  height: 400px
+  position: relative
+  left: 50%
+  right: 50%
+  margin: 5em -50vw
+  background-size: cover
+  background-position: bottom
+  display: flex
+  justify-content: center
+  align-items: center
+
+.margin-top-0
+  margin-top: 0 !important
+
+body
+  background-color: $dark
+  color: $light
+  padding-left: 15px
+  padding-right: 15px
+
+.is-size-1 
+    font-size: 4rem !important
+
+.swiper-container
+  background-color: #1D1E20
+  height: 70vh
+  width: 100%
+  border-radius: 1rem
+
+.swiper-button-next, .swiper-button-prev
+  background-image: inherit !important
+  width: 50% !important
+  height: 100% !important
+  top: 0px !important
+
+.swiper-pagination .swiper-pagination.bullet
+  background: #fff !important
+
+.swiper-button-next
+  right: 0px !important
+
+.swiper-button-prev
+  left: 0px !important
+
+hr
+  background-color: #1D1E20
+
+.logo 
+  margin: 0 auto
+  display: block
+  width: 150px
+  height: auto
+  max-width: 150px
+
+.read-more
+  color: white
+  transition: 1s
+
+.read-more:hover
+  color: #3273dc
+  font-size: 1.5rem
+
+.content h1, .content h2, .content h3, .content h4
+  color: $light
