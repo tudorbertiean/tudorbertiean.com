@@ -1,4 +1,4 @@
-# Tudor Bertiean's Portfolio Website
+# Portfolio Website
 
 ## Status
 [![Netlify Status](https://api.netlify.com/api/v1/badges/db64f2d0-4bb0-4326-a3ea-d9ec344021ee/deploy-status)](https://app.netlify.com/sites/tudorbertiean/deploys)
