@@ -28,42 +28,50 @@ const Navbar = class extends React.Component {
  }
  
  render() {
+   const { isBlog } = this.props
    return (
-  
-  <nav className="navbar" role="navigation" aria-label="main-navigation">
-    <div className="container">
-      <div className="navbar-brand">
-        <div className="navbar-item" title="Logo">
-          <img src={logo} alt="Tudor" style={{ width: '180px' }} />
+    <nav className="navbar" role="navigation" aria-label="main-navigation">
+      <div className="container">
+        <div className="navbar-brand">
+          <div className="navbar-item" title="Logo">
+            <img src={logo} alt="Tudor" style={{ width: '180px' }} />
+          </div>
+          {/* Hamburger menu */}
+          <div className="navbar-burger burger" data-target="navMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </div>
-        {/* Hamburger menu */}
-        <div className="navbar-burger burger" data-target="navMenu">
-          <span></span>
-          <span></span>
-          <span></span>
+        <div id="navMenu" className="navbar-menu">
+        <div className="navbar-end has-text-centered">
+          {!isBlog ? 
+            <React.Fragment >
+              <a className="navbar-item" href="#portfolio">
+                Portfolio
+              </a>
+              <a className="navbar-item" href="#experience">
+                Experience
+              </a>
+              <a className="navbar-item" href="#about">
+                About
+              </a>
+              <a className="navbar-item" href="#blog">
+                Blog
+              </a>
+              <a className="navbar-item" href="#contact">
+                Contact
+              </a>
+            </React.Fragment>
+            :
+            <Link className="navbar-item" to='/'>
+              Check out my portfolio!
+            </Link>
+          }
+        </div>
         </div>
       </div>
-      <div id="navMenu" className="navbar-menu">
-      <div className="navbar-end has-text-centered">
-        <a className="navbar-item" href="#portfolio">
-          Portfolio
-        </a>
-        <a className="navbar-item" href="#experience">
-          Experience
-        </a>
-        <a className="navbar-item" href="#about">
-          About
-        </a>
-        {/* <a className="navbar-item" href="#blog">
-          Blog
-        </a> */}
-        <a className="navbar-item" href="#contact">
-          Contact
-        </a>
-      </div>
-      </div>
-    </div>
-  </nav>
+    </nav>
   )}
 }
 

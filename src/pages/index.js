@@ -5,6 +5,7 @@ import Experience from '../components/Experience'
 import About from '../components/About'
 import Footer from '../components/Footer'
 import Contact from '../components/Contact'
+import PortfolioBlogs from '../components/PortfolioBlogs'
 import Img from "gatsby-image"
 import PropTypes from 'prop-types'
 
@@ -14,7 +15,7 @@ export default class IndexPage extends React.Component {
     const { data } = this.props
     return (
       // Include the header display followed by each component of the page
-      <Layout>
+      <Layout isBlog={false}>
         <section className="section" style={{height: '100vh'}}>
           <div className="intro columns">
             <div className="column">
@@ -36,6 +37,7 @@ export default class IndexPage extends React.Component {
         <Portfolio/>
         <Experience/>
         <About/>
+        <PortfolioBlogs />
         <Contact/>
         <Footer/>
       </Layout>)

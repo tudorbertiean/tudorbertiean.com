@@ -4,13 +4,13 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import PropTypes from 'prop-types'
 
+
 const Portfolio = ({data}) => {
   const { title, projects } = data
   return (
     <section id='portfolio'>
         <div className='container'>
             <h1 className="has-text-weight-bold is-size-2" style={{marginBottom: '70px'}}>{title}</h1>
-
             {projects.map((project) => {
               return (
               <div key={project.name} className='columns'>

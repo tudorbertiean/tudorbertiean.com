@@ -1,14 +1,14 @@
 import React from 'react'
 
 import Layout from '../../components/Layout'
-import BlogRoll from '../../components/BlogRoll'
+import AllBlogs from '../../components/AllBlogs'
 import Img from "gatsby-image"
 import PropTypes from 'prop-types'
 
 export default class BlogIndexPage extends React.Component {
   render() {
     return (
-        <Layout>
+        <Layout isBlog={true}>
             <section className="section">
             <div className="container">
                 <div className="content">
@@ -32,7 +32,7 @@ export default class BlogIndexPage extends React.Component {
                         </h1>
                     </div>
                 </div>
-                <BlogRoll />
+                <AllBlogs />
                 </div>
             </section>
         </Layout>
