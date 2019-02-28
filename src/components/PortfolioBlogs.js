@@ -13,18 +13,15 @@ class PortfolioBlogs extends React.Component {
                 <h1 className="has-text-weight-bold is-size-2 column" style={{marginBottom: '20px'}}>Blog.</h1>
                 <div className="columns is-multiline">
                     {posts && (posts.map(({ node: post }) => (
-                        <div
-                        className="is-parent column is-5"
-                        key={post.id}
-                        >
-                            <article className="tile is-child box blog-entry">
-                                <Link className="title has-text-info is-size-5" to={post.fields.slug}>
-                                    {post.frontmatter.title}
-                                </Link>
-                                <br/>
-                                <span className="subtitle is-size-5 is-block blog-date">{post.frontmatter.date}</span>
-                            </article>
-                        </div>
+                        <Link className="is-parent column is-5 blog-article"
+                          key={post.id} to={post.fields.slug}>
+                              <article className="tile is-child box blog-entry">
+                                  <div className="title has-text-info is-size-5">
+                                      {post.frontmatter.title}
+                                  </div>
+                                  <span className="subtitle is-size-5 is-block blog-date">{post.frontmatter.date}</span>
+                              </article>
+                        </Link>
                     )))}
                 </div>
                 <Link className="has-text-info is-size-5" to='/blog'>
