@@ -28,9 +28,19 @@ Gatsby is based on JAMstack principles which is a modern web development archite
 
 After reading the documentation and some sample projects, I begin redesigning and implementing my new website.
 
+# Performance
+
+Gatsby employs many modern techniques which optimize website performance:
+
+* _Static content_, available to be cached on a CDN and distributed around the world
+* _Prefetched linked paged_, the pages you will need to be loaded via links are loaded in the background while you view the website
+* _Code splitting_, on start-up load the JavaScript code required to view the current page, not the whole application
+* _Progressive image loading_, instilling a blurry image placeholder while the image is loading to instantly show that there is an image and to avoid content from 'bouncing' around 
+* _AMP format_, Google's special static page format which allows faster loads and prioritized SEO
+
 # Implementation
 
-Although I won't be going through the entire coding process, I will outline some aspects of Gatsby such as creating dynamic pages.
+Although I won't be going through the entire coding process, I will outline some aspects of Gatsby such as creating dynamic static pages which contain my main website and blog posts.
 
 One of the great things about Gatsby is the fact that it allows for you to dynamically create pages based on your needs. In my situation, I have a single page which contains my portfolio website, and then a page which contains my blog. This is further broken down into each blog post created being on a page of its own. 
 
@@ -92,7 +102,6 @@ query BlogPostByID($id: String!) {
     }
   }
 }
-
 ```
 
 I now have the data required to display this blog post with the html field and the metadata which is stored in the frontmatter. The data is then passed as a prop into the React component, styled to my liking.
