@@ -1,47 +1,60 @@
 import React from 'react'
-import rbc from '../img/rbc.png'
-import alias from '../img/alias-logo.png'
-import manulife from '../img/manulife-logo.png'
-import freelance from '../img/freelance.png'
+import Img from "gatsby-image"
+import { StaticQuery, graphql } from "gatsby"
 
-const logos = [
-{
-  name: 'Freelance',
-  image: freelance
-},
-{
-  name: 'RBC',
-  image: rbc
-},
-{
-  name: 'Manulife',
-  image: manulife
-},
-{
-  name: 'Alias Apps',
-  image: alias
+const logoHash = {
+  "rbc.png": "RBC",
+  "freelance.png": "Freelance",
+  "alias-logo.png": "Alias Apps",
+  "manulife-logo.png": "Manulife"
 }
-]
 
-const Experience = () => {
+const Experience = ({ logos }) => {
   return (
     <section id='experience'>
       <div className='container animated bounceInUp' style={{marginTop: '80px'}}>
         <h1 className="has-text-weight-bold is-size-2 column" style={{marginBottom: '20px'}}>Experience.</h1>
 
         <div className='columns is-centered'>
-          {logos.map((logo) =>
-            <div key={logo.name} className='column is-offset-1 logo' style={{padding: 'inherit'}}>
-              <p className="is-size-4 has-text-centered	">{logo.name}</p><br/>
-              <img className='logo is-centered' src={logo.image} alt={logo.name}/>
-              <br/>
-              <br/>
-            </div>
-          )}
+          {logos.map((logo) => {
+            const { fluid } = logo.node.childImageSharp
+            const name = logoHash[fluid.originalName]
+            return (
+              <div key={name} className='column is-offset-1 logo' style={{padding: 'inherit'}}>
+                <p className="is-size-4 has-text-centered	">{name}</p><br/>
+                <Img fluid={fluid} alt={name}/>
+                <br/>
+                <br/>
+              </div>
+          )})}
         </div>
       </div>
     </section>
   )
 }
+  
 
-export default Experience
+
+export default props => (
+  <StaticQuery
+    query={graphql`
+      query LogoQuery {
+        allFile(filter: {relativeDirectory: {eq: "logos"}}) {          
+          edges {
+            node {
+              childImageSharp {
+                fluid(maxWidth: 150) {
+                  ...GatsbyImageSharpFluid
+                  originalName
+                }
+              }
+            }
+          }
+        }
+      }
+    `}
+    render={data => (
+      <Experience logos={data.allFile.edges} {...props}/>
+    )}
+  />
+)

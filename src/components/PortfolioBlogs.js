@@ -47,7 +47,7 @@ export default () => (
     query PortfolioBlogsQuery {
       allMarkdownRemark(
         sort: { order: DESC, fields: [frontmatter___date] },
-        filter: { frontmatter: { templateKey: { eq: "blog-post" } }}
+        filter: { frontmatter: { pageType: { eq: "blog" } }}
         limit: 3
       ) {
         edges {

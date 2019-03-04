@@ -1,5 +1,6 @@
 ---
 templateKey: blog-post
+pageType: "blog"
 title: "Optimizing my website to be blazing fast  \U0001F680"
 date: 2019-02-25T21:55:43.045Z
 description: Custom portfolio website and blog built with GatsbyJS
