@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import { connect } from "react-redux"
 import logo from '../img/logo.png'
 
 const Navbar = class extends React.Component {
-
   componentDidMount() {
     // Get all "navbar-burger" elements
    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
@@ -26,6 +26,10 @@ const Navbar = class extends React.Component {
      });
    }
  }
+
+ componentWillUnmount() {
+  this.props.clearCounter()
+ }
  
  render() {
    const { isBlog } = this.props
@@ -44,6 +48,7 @@ const Navbar = class extends React.Component {
           </div>
         </div>
         <div id="navMenu" className="navbar-menu">
+        {this.props.count > 0 && <p style={{marginTop: '10px', marginLeft: '50px'}}>{this.props.count}</p>}
         <div className="navbar-end has-text-centered">
           {!isBlog ? 
             <React.Fragment >
@@ -64,9 +69,11 @@ const Navbar = class extends React.Component {
               </a>
             </React.Fragment>
             :
-            <Link className="navbar-item" to='/'>
-              Check out my portfolio!
-            </Link>
+            <React.Fragment>
+              <Link className="navbar-item" to='/'>
+                Check out my portfolio!
+              </Link>
+            </React.Fragment>
           }
         </div>
         </div>
@@ -75,4 +82,15 @@ const Navbar = class extends React.Component {
   )}
 }
 
-export default Navbar
+const mapStateToProps = ({ count }) => {
+  return { count }
+}
+
+const mapDispatchToProps = dispatch => {
+  return { clearCounter: () => dispatch({ type: `CLEAR` }) }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Navbar)
