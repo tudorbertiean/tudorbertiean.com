@@ -1,4 +1,4 @@
-import { createStore as reduxCreateStore } from "redux"
+import { createStore } from "redux"
 
 const reducer = (state, action) => {
   switch(action.type){
@@ -18,5 +18,5 @@ const reducer = (state, action) => {
 
 const initialState = { count: 0 }
 
-const createStore = () => reduxCreateStore(reducer, initialState)
-export default createStore
+const store = () => createStore(reducer, initialState)
+export default store
