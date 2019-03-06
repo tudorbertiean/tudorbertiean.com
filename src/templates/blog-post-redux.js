@@ -7,31 +7,6 @@ import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
 import { connect } from "react-redux"
 
-const Counter = ({ count, increment }) => (
-  <div style={{marginBottom: '10px'}}>
-    <p>Count: {count}</p>
-    <button onClick={increment}>Increment</button>
-  </div>
-)
-
-Counter.propTypes = {
-  count: PropTypes.number.isRequired,
-  increment: PropTypes.func.isRequired,
-}
-
-const mapStateToProps = ({ count }) => {
-  return { count }
-}
-
-const mapDispatchToProps = dispatch => {
-  return { increment: () => dispatch({ type: `INCREMENT` }) }
-}
-
-const ConnectedCounter = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Counter)
-
 export const ReduxBlogPostTemplate = ({
   content,
   contentComponent,
@@ -39,6 +14,8 @@ export const ReduxBlogPostTemplate = ({
   tags,
   title,
   helmet,
+  count,
+  increment,
 }) => {
   const PostContent = contentComponent || Content
 
@@ -51,7 +28,10 @@ export const ReduxBlogPostTemplate = ({
             <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
               {title}
             </h1>
-            <ConnectedCounter />
+            <div style={{marginBottom: '10px'}}>
+              <p>Count: {count}</p>
+              <button onClick={increment}>Increment</button>
+            </div>
             <PostContent content={content} />
             {tags && tags.length ? (
               <div style={{ marginTop: `4rem` }}>
@@ -80,37 +60,58 @@ ReduxBlogPostTemplate.propTypes = {
   helmet: PropTypes.object,
 }
 
-const ReduxBlogPost = ({ data }) => {
-  const { markdownRemark: post } = data
+const ReduxBlogPost = class extends React.Component {
+  componentWillUnmount(){
+    this.props.clear()
+  }
 
-  return (
-    <Layout isBlog={true}>
-      <ReduxBlogPostTemplate
-        content={post.html}
-        contentComponent={HTMLContent}
-        description={post.frontmatter.description}
-        helmet={
-          <Helmet
-            titleTemplate="%s | Blog"
-          >
-            <title>{`${post.frontmatter.title}`}</title>
-            <meta name="description" content={`${post.frontmatter.description}`} />
-          </Helmet>
-        }
-        tags={post.frontmatter.tags}
-        title={post.frontmatter.title}
-      />
-    </Layout>
-  )
+  render() {
+    const { markdownRemark: post } = this.props.data
+    return (
+      <Layout isBlog={true}>
+        <ReduxBlogPostTemplate
+          content={post.html}
+          contentComponent={HTMLContent}
+          description={post.frontmatter.description}
+          helmet={
+            <Helmet
+              titleTemplate="%s | Blog"
+            >
+              <title>{`${post.frontmatter.title}`}</title>
+              <meta name="description" content={`${post.frontmatter.description}`} />
+            </Helmet>
+          }
+          tags={post.frontmatter.tags}
+          title={post.frontmatter.title}
+          count={this.props.count}
+          increment={this.props.increment}
+        />
+      </Layout>
+    )}
 }
 
 ReduxBlogPost.propTypes = {
   data: PropTypes.shape({
     markdownRemark: PropTypes.object,
   }),
+  count: PropTypes.number,
+  increment: PropTypes.func
 }
 
-export default ReduxBlogPost
+const mapStateToProps = ({ count }) => {
+  return { count }
+}
+
+const mapDispatchToProps = dispatch => ({
+    increment: () => dispatch({ type: `INCREMENT` }),
+    clear: () => dispatch({ type: `CLEAR` }),
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ReduxBlogPost)
+
 
 export const pageQuery = graphql`
   query ReduxBlogPostByID($id: String!) {

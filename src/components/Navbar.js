@@ -21,14 +21,9 @@ const Navbar = class extends React.Component {
          // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
          el.classList.toggle('is-active');
          $target.classList.toggle('is-active');
- 
        });
      });
    }
- }
-
- componentWillUnmount() {
-  this.props.clearCounter()
  }
  
  render() {
@@ -86,11 +81,6 @@ const mapStateToProps = ({ count }) => {
   return { count }
 }
 
-const mapDispatchToProps = dispatch => {
-  return { clearCounter: () => dispatch({ type: `CLEAR` }) }
-}
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(Navbar)

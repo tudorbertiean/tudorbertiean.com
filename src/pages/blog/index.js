@@ -2,8 +2,6 @@ import React from 'react'
 
 import Layout from '../../components/Layout'
 import AllBlogs from '../../components/AllBlogs'
-import Img from "gatsby-image"
-import PropTypes from 'prop-types'
 
 export default class BlogIndexPage extends React.Component {
   render() {
